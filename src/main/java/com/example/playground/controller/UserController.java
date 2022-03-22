@@ -1,8 +1,10 @@
 package com.example.playground.controller;
 
+import com.example.playground.models.Content;
 import com.example.playground.models.User;
 import com.example.playground.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +26,15 @@ public class UserController {
     @GetMapping(value="/{username}")
     public User getUser(@PathVariable(value = "username") String username){
         return userService.getUserByUsername(username);
+    }
+
+    @PostMapping(value ="/{username}/add")
+    public ResponseEntity<User> addContent(@PathVariable(value="username") String username, @RequestBody Content content){
+        System.out.println(username);
+        System.out.println(content);
+        User user = userService.addUserContent(username, content);
+        int status = user == null?500:201;
+        return ResponseEntity.status(status).body(user);
     }
 
     @PostMapping("/add")

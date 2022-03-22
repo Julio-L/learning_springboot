@@ -1,7 +1,7 @@
 package com.example.playground.models;
 
+
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +13,7 @@ public class User {
     @Column(unique = true)
     private String username;
 
-    @OneToMany(mappedBy="user")
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<Content> content;
 
     public User(String username){
@@ -36,5 +36,9 @@ public class User {
 
     public String toString(){
         return "Username: " + this.username;
+    }
+
+    public void addContent(Content contentItem){
+        content.add(contentItem);
     }
 }
