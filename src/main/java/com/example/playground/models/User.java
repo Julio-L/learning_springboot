@@ -13,6 +13,11 @@ public class User {
     @Column(unique = true)
     private String username;
 
+    private String password;
+
+    @ManyToMany(mappedBy = "users")
+    private List<Role> roles;
+
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<Content> content;
 
@@ -35,10 +40,18 @@ public class User {
     }
 
     public String toString(){
-        return "Username: " + this.username;
+        return "Username: " + this.username + ", Pass: "+ this.password;
     }
 
     public void addContent(Content contentItem){
         content.add(contentItem);
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
     }
 }
