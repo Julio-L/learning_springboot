@@ -16,7 +16,7 @@ public class HomeController {
 
     @GetMapping(value = "/")
     public String welcome(){
-        return "Welcome";
+        return "hello";
     }
 
     //Testing sending images to client and how classpathresource works
